@@ -128,6 +128,58 @@
           }
         }
       }
+    },
+    "/api/match-info/{matchId}": {
+      "get": {
+        "summary": "Retrieve match information",
+        "parameters": [
+          {
+            "name": "matchId",
+            "in": "path",
+            "required": true,
+            "description": "ID of the match to retrieve",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "A": {
+                      "$ref": "#/components/schemas/Team"
+                    },
+                    "H": {
+                      "$ref": "#/components/schemas/Team"
+                    },
+                    "S1": {
+                      "type": "integer",
+                      "description": "Score of the away team"
+                    },
+                    "S2": {
+                      "type": "integer",
+                      "description": "Score of the home team"
+                    },
+                    "St": {
+                      "type": "integer",
+                      "description": "Status of the match"
+                    },
+                    "W": {
+                      "type": "integer",
+                      "description": "Winner of the match (1 for away, 0 for draw, 2 for home)"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -181,6 +233,68 @@
           },
           "message": {
             "type": "string"
+          }
+        }
+      },
+      "Team": {
+        "type": "object",
+        "properties": {
+          "BL": {
+            "type": "boolean",
+            "description": "Blocked status of the team"
+          },
+          "I": {
+            "type": "string",
+            "description": "Team ID"
+          },
+          "IM": {
+            "type": "string",
+            "description": "Path to team logo image"
+          },
+          "M": {
+            "type": "string",
+            "description": "Team's logo identifier"
+          },
+          "P": {
+            "type": "boolean",
+            "description": "Placeholder status of the team"
+          },
+          "S": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "IM": {
+                  "type": "string",
+                  "description": "Image path of the team"
+                },
+                "M": {
+                  "type": "string",
+                  "description": "Logo identifier"
+                },
+                "T": {
+                  "type": "string",
+                  "description": "Name of the team"
+                }
+              }
+            },
+            "description": "Array of team details"
+          },
+          "SI": {
+            "type": "integer",
+            "description": "Status indicator of the team"
+          },
+          "T": {
+            "type": "string",
+            "description": "Team name"
+          },
+          "TP": {
+            "type": "integer",
+            "description": "Team points or ranking position"
+          },
+          "XI": {
+            "type": "integer",
+            "description": "Extended identifier of the team"
           }
         }
       }
